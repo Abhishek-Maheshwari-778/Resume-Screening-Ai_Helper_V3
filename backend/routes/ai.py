@@ -468,7 +468,9 @@ async def analyze_public(
             detail=f"Unsupported file type '{fname}'. Please upload a PDF, DOCX, or TXT file."
         )
 
+    stage = "init"
     try:
+        stage = "file_read"
         file_bytes = await file.read()
         if len(file_bytes) > MAX_FILE_SIZE:
             raise HTTPException(status_code=413, detail=f"File too large. Max size is {MAX_FILE_SIZE // 1024 // 1024}MB.")
@@ -490,6 +492,7 @@ async def analyze_public(
             return cached["result"]
 
         #  Text Extraction 
+        stage = "parsing"
         from ai.parser_service import extract_text as parse_text, extract_sections
         text = parse_text(file_bytes, fname)
 
@@ -637,12 +640,13 @@ async def analyze_public(
     except HTTPException as e:
         raise e
     except Exception as e:
-        print(f"FATAL ERROR in analyze-public: {str(e)}")
         import traceback
+        error_msg = f"Stage {stage} failed: {str(e)}"
+        print(f"FATAL ERROR: {error_msg}")
         traceback.print_exc()
         return JSONResponse(
             status_code=500,
-            content={"error": "Internal Server Error", "detail": str(e)}
+            content={"error": "Analysis Failed", "stage": stage, "detail": str(e)}
         )
 
 
@@ -985,6 +989,8 @@ RESUME CONTENT:
 """
     
     try:
+        #  AI Analysis 
+        stage = "ai_analysis"
         from ai.groq_service import GroqService
         groq = GroqService()
         messages = [
