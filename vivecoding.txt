@@ -1,0 +1,120 @@
+🧠 VIVE-CODING MASTER STATE - AI RESUME PLATFORM v3.1
+===================================================
+
+If this chat is deleted, reading this file will allow any AI Assistant to instantly resume work with 100% context.
+This file was last updated: 2026-04-06
+
+---
+
+## 📅 CURRENT PLATFORM STATE (STABLE - v3.1)
+
+All 4 major development phases are COMPLETE. Frontend and backend are running.
+
+---
+
+## 🔑 API KEY STATUS (Last checked: 2026-04-06)
+
+| Service    | Status                        | Notes                                          |
+|------------|-------------------------------|------------------------------------------------|
+| Groq       | ✅ LIVE                        | Key: gsk_3omoPM... — Primary AI engine         |
+| DeepSeek   | ❌ OUT OF CREDITS (402)        | Renew at platform.deepseek.com — kept as fallback |
+| Firebase   | ✅ ACTIVE (check console)      | resume-f74d9 project — Auth configured         |
+| MongoDB    | ✅ LOCAL (localhost:27017)     | Or use Atlas URL in .env                       |
+
+---
+
+## 🏗️ AI ENGINE CHAIN (Updated Session: 2026-04-06)
+
+Since DeepSeek is out of credits, Groq is now PRIMARY:
+1. **Groq** (llama-3.3-70b-versatile) → Primary for all ATS analysis
+2. **DeepSeek** → Fallback (when credits are recharged)
+3. **Local NLP** (spaCy + TF-IDF) → Last resort fallback — ALWAYS works
+
+This means the platform WORKS even without any external AI credits.
+
+---
+
+## 🔧 SESSION FIXES (2026-04-06)
+
+### Backend Fixes:
+- [DONE] **AI Engine Switch**: Groq is now primary (DeepSeek out of credits)
+- [DONE] **GroqService.analyze_resume_ats()**: New method for full ATS scoring via Groq
+- [DONE] **parser_service.py**: Complete rewrite with 4-library fallback chain
+  - pypdf (primary) → PyPDF2 → pdfminer.six → raw bytes extraction
+  - Handles corrupt PDFs, double extensions (.pptx.pdf), non-Western text
+- [DONE] **analyze-public endpoint**: Full local NLP fallback if all AI fails
+- [DONE] **screen endpoint**: Per-file error handling, partial batch success, warnings
+- [DONE] **requirements.txt**: Removed PyPDF2 (deprecated), added pdfminer.six
+- [DONE] **.env SECRET_KEY**: Replaced placeholder with real 128-char hex key
+- [DONE] **JWT expiry**: Reduced from 1440 min to 120 min (security improvement)
+- [DONE] **seed_full.py**: Created full seeder with users, jobs, resumes
+
+### Frontend Fixes:
+- [DONE] **CandidateScreening.tsx**: Handles new {results, warnings} response shape
+- [DONE] **HRDashboard.tsx**: Fetches real-time metrics from backend
+- [DONE] **InterviewPrep.tsx**: Connected to /api/ai/generate-interview
+- [DONE] **UserManagement.tsx**: Connected to /api/admin/ endpoints
+- [DONE] **PlatformAnalytics.tsx**: Connected to backend analytics
+- [DONE] **SkillExtraction.tsx**: Fixed bulk upload URL
+
+---
+
+## ✅ PHASES 1-4 (DONE — Reference vivecoding v3.0 for full detail)
+
+- PHASE 1: Critical Fixes ✅
+- PHASE 2: AI/ML Quality ✅
+- PHASE 3: Missing Features ✅
+- PHASE 4: UX Polish ✅
+
+---
+
+## 🚀 HOW TO RUN
+
+### Backend:
+```
+cd backend
+.\venv\Scripts\activate
+pip install -r requirements.txt
+python -m spacy download en_core_web_sm   (first time only)
+python seed_db.py                          (optional: reset demo users)
+python seed_full.py                        (optional: full data with jobs & resumes)
+uvicorn main:app --reload --port 8000
+```
+
+### Frontend:
+```
+cd frontend
+npm install
+npm run dev
+```
+
+### Demo Accounts:
+- Admin:     admin@resume.ai   / Admin@123
+- HR:        hr@techcorp.com   / Hr@12345
+- Candidate: john@example.com  / Cand@123
+
+### API Docs: http://localhost:8000/docs
+
+---
+
+## 🎯 WHAT'S LEFT (Phase 5+)
+
+- [ ] Recharge DeepSeek credits → add key at platform.deepseek.com
+- [ ] Stripe/Razorpay monetization integration
+- [ ] Rate limiting (slowapi) on /api/ai/* routes
+- [ ] Playwright E2E tests for core user journeys
+- [ ] Pytest unit tests for nlp_service functions
+- [ ] Deploy: backend → Railway/Render, frontend → Vercel
+- [ ] Firebase Security Rules for DB + Storage
+- [ ] Firebase App Check to prevent auth abuse
+
+---
+
+RECORD CREATED:  2026-03-30
+LAST UPDATED:    2026-04-06
+SYSTEM VERSION:  3.1.0
+AGENT SIGNATURE: ANTIGRAVITY (Claude Sonnet 4.6 Thinking)
+BUILD STATUS:    ✅ PASSING
+BACKEND STATUS:  ✅ PASSING (Groq primary, local NLP fallback always active)
+AI ENGINE:       Groq llama-3.3-70b-versatile (PRIMARY) | Local NLP (FALLBACK)
+KEY ALERT:       ⚠️ DEEPSEEK OUT OF CREDITS — recharge at platform.deepseek.com

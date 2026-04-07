@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply antialiased;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.1) transparent;
+  }
+
+  /* Custom scrollbar for webkit browsers */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.15); }
+}
+
+:root {
+  --bg-base: #080b12;
+  --bg-surface: #111420;
+  --bg-card: #161b22;
+  --text-primary: #ffffff;
+  --text-secondary: #d1d5db;
+  --border-color: rgba(255, 255, 255, 0.08);
+}
+
+html.light-theme {
+  --bg-base: #f9fafb;
+  --bg-surface: #ffffff;
+  --bg-card: #ffffff;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Global mappings to fix hardcoded dark classes */
+html.light-theme .bg-\[\#080b12\] { background-color: var(--bg-base) !important; color: var(--text-primary) !important; }
+html.light-theme .bg-\[\#111420\] { background-color: var(--bg-surface) !important; color: var(--text-primary) !important; border-color: var(--border-color) !important; }
+html.light-theme .bg-\[\#161b22\] { background-color: var(--bg-card) !important; color: var(--text-primary) !important; border-color: var(--border-color) !important; }
+html.light-theme .bg-black\/20 { background-color: rgba(0, 0, 0, 0.03) !important; }
+html.light-theme .bg-black\/40 { background-color: rgba(0, 0, 0, 0.05) !important; }
+html.light-theme .bg-white\/5 { background-color: rgba(0, 0, 0, 0.04) !important; }
+html.light-theme .bg-white\/2 { background-color: rgba(0, 0, 0, 0.01) !important; }
+html.light-theme .text-white { color: var(--text-primary) !important; }
+html.light-theme .text-gray-400, html.light-theme .text-gray-500 { color: var(--text-secondary) !important; }
+html.light-theme .border-white\/5, html.light-theme .border-white\/10 { border-color: var(--border-color) !important; }
+
+/* Re-invert media elements if they still use filters (but we removed them) */
+html.light-theme .preserve-color { filter: none !important; }
+
+/* Animations that power the entire dynamic UX */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes role-spin {
+  0%, 10% { transform: translateY(0); }
+  14%, 24% { transform: translateY(-1.2em); }
+  28%, 38% { transform: translateY(-2.4em); }
+  42%, 52% { transform: translateY(-3.6em); }
+  56%, 66% { transform: translateY(-4.8em); }
+  70%, 80% { transform: translateY(-6.0em); }
+  84%, 100% { transform: translateY(-7.2em); }
+}
+
+.animate-in {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+.animate-role-spin {
+  animation: role-spin 12s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}

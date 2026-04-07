@@ -1,0 +1,46 @@
+🚀 AI Resume Platform V3 - Neural Intelligence Project Info
+
+--- 🔑 DEFAULT SYSTEM NODES (DEMO ACCOUNTS) ---
+Use these credentials to navigate the neural architecture across all roles.
+
+| ROLE       | EMAIL                      | PASSWORD   | ARCHITECT           |
+|------------|----------------------------|------------|---------------------|
+| ADMIN      | admin@resume.ai            | Admin@123  | Super Control       |
+| HR         | hr@techcorp.com             | Hr@12345   | Recruitment Lead    |
+| EMPLOYER   | employer@globex.com         | Emp@12345  | Enterprise Head     |
+| CANDIDATE  | john@example.com            | Cand@123   | Neural Candidate    |
+
+--- 🛠️ PROTOCOL DEPLOYMENT (HOW TO RUN) ---
+
+1. BACKEND (FastAPI - Neural Hub):
+   - CD into 'backend' node.
+   - Activate environment: `.\venv\Scripts\activate`
+   - Install Neural dependencies: `pip install -r requirements.txt`
+   - Sync spaCy model: `python -m spacy download en_core_web_sm`
+   - Deploy server: `uvicorn main:app --reload --port 8000`
+
+2. FRONTEND (Vite/React - Interface DNA):
+   - CD into 'frontend' node.
+   - Initialize modules: `npm install`
+   - Deploy UI: `npm run dev` (http://localhost:5173)
+
+--- 🗺️ SYSTEM ARCHITECTURE (V3) ---
+
+- **Neural Synchronization**: Frontend communicates via the `/api/` gateway to the FastAPI LPU hub.
+- **Groq LPU Engine**: Powering all structural summaries, resume deconstruction, and JD synthesis.
+- **NLP Matrix**: Leveraging spaCy NER for sub-second entity extraction and skill mapping.
+- **HR JD Synthesizer**: Specialized node for HR to generate & refine requirements via AI dialogue.
+
+--- 👥 FOUNDATIONAL TEAM ---
+
+- **Govind Gupta** (@Govind-gupta243) — Lead Architect
+- **Khushi Gupta** (@happycode290) — Collaborator
+- **Pallal** (@pallal) — Collaborator
+
+--- 🤖 DIAGNOSTICS & SYSTEM TIPS ---
+
+- **Auth Sync**: If "401 Unauthorized" occurs, re-initialize portal session (logout/login).
+- **Environment**: Ensure `.env` contains a valid **GROQ_API_KEY**. DeepSeek has been decommissioned in V3 for maximum speed.
+- **Precision**: 8000-character context window used for deep resume analysis.
+
+**Architected by Govind Gupta & Team.**
