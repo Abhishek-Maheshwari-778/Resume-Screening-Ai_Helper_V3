@@ -152,7 +152,7 @@ async def root():
     return {"message": "AI Resume Platform v3.0", "status": "running", "docs": "/docs"}
 
 
-@app.get("/health")
+@app.get("/api/health")
 async def health():
     print("Health check reached!")
     return {
