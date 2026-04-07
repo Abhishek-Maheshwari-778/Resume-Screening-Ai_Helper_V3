@@ -109,41 +109,76 @@ const About: React.FC = () => {
              <h3 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase italic leading-none">THE MINDS BEHIND <br /><span className="text-primary">THE MATRIX</span></h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
-             <div className="bg-[#0b0e14] border border-[var(--border-color)] rounded-[3rem] p-10 text-center group hover:border-blue-500/50 transition-all shadow-2xl relative overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-6">
+             {/* Abhishek */}
+             <div className="bg-[#0b0e14] border border-[var(--border-color)] rounded-[2.5rem] p-8 text-center group hover:border-blue-500/50 transition-all shadow-2xl relative overflow-hidden flex flex-col justify-between">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-[40px] opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="w-24 h-24 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-[2rem] flex items-center justify-center text-4xl mb-8 mx-auto shadow-2xl group-hover:rotate-12 transition-transform italic border-4 border-white/5">💎</div>
-                <h4 className="text-white font-black text-xl mb-2 tracking-tight uppercase italic">Abhishek Maheshwari</h4>
-                <p className="text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-6 italic">Chief Innovation Architect</p>
-                <div className="text-gray-500 text-[11px] font-medium italic opacity-60">"Visionary behind the platform's strategic evolution and architectural logic."</div>
-                <div className="mt-8 text-[10px] font-black text-white/20 uppercase tracking-widest italic group-hover:text-blue-400 transition-colors">@Abhishek-Maheshwari-778</div>
+                <div>
+                   <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-2xl flex items-center justify-center text-3xl mb-6 mx-auto shadow-2xl group-hover:rotate-12 transition-transform italic border-4 border-white/5">💎</div>
+                   <h4 className="text-white font-black text-lg mb-1 tracking-tight uppercase italic">Abhishek Maheshwari</h4>
+                   <p className="text-blue-400 text-[9px] font-black uppercase tracking-[0.2em] mb-4 italic">Developer • Leader • Collaborator • Vivecoder</p>
+                   <div className="text-gray-500 text-[10px] font-medium italic opacity-60 leading-relaxed truncate px-2">"Visionary behind the platform's strategic evolution."</div>
+                </div>
+                <div className="mt-8 space-y-2">
+                   <a href="https://github.com/Abhishek-Maheshwari-778" target="_blank" className="block text-[9px] font-black text-white/20 uppercase tracking-widest italic group-hover:text-blue-400 transition-colors hover:scale-105">@Abhishek-Maheshwari-778</a>
+                   <a href="https://www.linkedin.com/in/abhishekmaheshwari2436/" target="_blank" className="block text-[9px] font-black text-white/20 uppercase tracking-widest italic hover:text-blue-500 transition-colors hover:scale-105">LinkedIn Profile ↗</a>
+                </div>
              </div>
 
-             <div className="bg-[#0b0e14] border border-[var(--border-color)] rounded-[3rem] p-10 text-center group hover:border-primary/50 transition-all shadow-2xl relative overflow-hidden">
+             {/* Govind */}
+             <div className="bg-[#0b0e14] border border-[var(--border-color)] rounded-[2.5rem] p-8 text-center group hover:border-primary/50 transition-all shadow-2xl relative overflow-hidden flex flex-col justify-between">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-[40px] opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="w-24 h-24 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-[2rem] flex items-center justify-center text-4xl mb-8 mx-auto shadow-2xl group-hover:rotate-12 transition-transform italic border-4 border-white/5">👑</div>
-                <h4 className="text-white font-black text-xl mb-2 tracking-tight uppercase italic">Govind Gupta</h4>
-                <p className="text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-6 italic">Developer & Leader</p>
-                <div className="text-gray-500 text-[11px] font-medium italic opacity-60">"Architect of the core neural engine and structural leadership."</div>
-                <div className="mt-8 text-[10px] font-black text-white/20 uppercase tracking-widest italic group-hover:text-primary transition-colors">@Govind-gupta243</div>
+                <div>
+                   <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-2xl flex items-center justify-center text-3xl mb-6 mx-auto shadow-2xl group-hover:rotate-12 transition-transform italic border-4 border-white/5">👑</div>
+                   <h4 className="text-white font-black text-lg mb-1 tracking-tight uppercase italic">Govind Gupta</h4>
+                   <p className="text-primary text-[9px] font-black uppercase tracking-[0.2em] mb-4 italic">Lead Architect • Strategist</p>
+                   <div className="text-gray-500 text-[10px] font-medium italic opacity-60 leading-relaxed truncate px-2">"Architect of the core neural engine and logic."</div>
+                </div>
+                <div className="mt-8">
+                   <a href="https://github.com/Govind-gupta243" target="_blank" className="block text-[9px] font-black text-white/20 uppercase tracking-widest italic group-hover:text-primary transition-colors hover:scale-105">@Govind-gupta243</a>
+                </div>
              </div>
 
-             <div className="bg-[#0b0e14] border border-[var(--border-color)] rounded-[3rem] p-10 text-center group hover:border-emerald-500/50 transition-all shadow-2xl relative overflow-hidden">
+             {/* Khushi */}
+             <div className="bg-[#0b0e14] border border-[var(--border-color)] rounded-[2.5rem] p-8 text-center group hover:border-emerald-500/50 transition-all shadow-2xl relative overflow-hidden flex flex-col justify-between">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-[40px] opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="w-24 h-24 bg-gradient-to-br from-emerald-600 to-cyan-500 rounded-[2rem] flex items-center justify-center text-4xl mb-8 mx-auto shadow-2xl group-hover:-rotate-12 transition-transform italic border-4 border-white/5">✨</div>
-                <h4 className="text-white font-black text-xl mb-2 tracking-tight uppercase italic">Khushi Gupta</h4>
-                <p className="text-emerald-400 text-[10px] font-black uppercase tracking-[0.2em] mb-6 italic">Collaborator</p>
-                <div className="text-gray-500 text-[11px] font-medium italic opacity-60">"Deep-logic collaborator and professional vector designer."</div>
-                <div className="mt-8 text-[10px] font-black text-white/20 uppercase tracking-widest italic group-hover:text-emerald-400 transition-colors">@happycode290</div>
+                <div>
+                  <div className="w-20 h-20 bg-gradient-to-br from-emerald-600 to-cyan-500 rounded-2xl flex items-center justify-center text-3xl mb-6 mx-auto shadow-2xl group-hover:-rotate-12 transition-transform italic border-4 border-white/5">✨</div>
+                  <h4 className="text-white font-black text-lg mb-1 tracking-tight uppercase italic">Khushi Gupta</h4>
+                  <p className="text-emerald-400 text-[9px] font-black uppercase tracking-[0.2em] mb-4 italic">Collaborator • Designer</p>
+                  <div className="text-gray-500 text-[10px] font-medium italic opacity-60 leading-relaxed truncate px-2">"Professional vector designer and logic engineer."</div>
+                </div>
+                <div className="mt-8">
+                  <a href="https://github.com/happycode290" target="_blank" className="block text-[9px] font-black text-white/20 uppercase tracking-widest italic group-hover:text-emerald-400 transition-colors hover:scale-105">@happycode290</a>
+                </div>
              </div>
 
-             <div className="bg-[#0b0e14] border border-[var(--border-color)] rounded-[3rem] p-10 text-center group hover:border-violet-500/50 transition-all shadow-2xl relative overflow-hidden">
+             {/* Palak (pallal) */}
+             <div className="bg-[#0b0e14] border border-[var(--border-color)] rounded-[2.5rem] p-8 text-center group hover:border-violet-500/50 transition-all shadow-2xl relative overflow-hidden flex flex-col justify-between">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-violet-500/5 rounded-full blur-[40px] opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="w-24 h-24 bg-gradient-to-br from-violet-600 to-purple-500 rounded-[2rem] flex items-center justify-center text-4xl mb-8 mx-auto shadow-2xl group-hover:rotate-6 transition-transform italic border-4 border-white/5">🗝️</div>
-                <h4 className="text-white font-black text-xl mb-2 tracking-tight uppercase italic">Pallal</h4>
-                <p className="text-violet-400 text-[10px] font-black uppercase tracking-[0.2em] mb-6 italic">Collaborator</p>
-                <div className="text-gray-500 text-[11px] font-medium italic opacity-60">"Security strategist and interface logic collaborator."</div>
-                <div className="mt-8 text-[10px] font-black text-white/20 uppercase tracking-widest italic group-hover:text-violet-400 transition-colors">@pallal</div>
+                <div>
+                   <div className="w-20 h-20 bg-gradient-to-br from-violet-600 to-purple-500 rounded-2xl flex items-center justify-center text-3xl mb-6 mx-auto shadow-2xl group-hover:rotate-6 transition-transform italic border-4 border-white/5">🗝️</div>
+                   <h4 className="text-white font-black text-lg mb-1 tracking-tight uppercase italic">Palak (Pallal)</h4>
+                   <p className="text-violet-400 text-[9px] font-black uppercase tracking-[0.2em] mb-4 italic">Collaborator • Strategist</p>
+                   <div className="text-gray-500 text-[10px] font-medium italic opacity-60 leading-relaxed truncate px-2">"Security strategist and interface logic collaborator."</div>
+                </div>
+                <div className="mt-8">
+                   <a href="https://github.com/pallal" target="_blank" className="block text-[9px] font-black text-white/20 uppercase tracking-widest italic group-hover:text-violet-400 transition-colors hover:scale-105">@pallal</a>
+                </div>
+             </div>
+
+             {/* Shobhit */}
+             <div className="bg-[#0b0e14] border border-[var(--border-color)] rounded-[2.5rem] p-8 text-center group hover:border-orange-500/50 transition-all shadow-2xl relative overflow-hidden flex flex-col justify-between">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-full blur-[40px] opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div>
+                   <div className="w-20 h-20 bg-gradient-to-br from-orange-600 to-yellow-500 rounded-2xl flex items-center justify-center text-3xl mb-6 mx-auto shadow-2xl group-hover:rotate-12 transition-transform italic border-4 border-white/5">🚀</div>
+                   <h4 className="text-white font-black text-lg mb-1 tracking-tight uppercase italic">Shobhit</h4>
+                   <p className="text-orange-400 text-[9px] font-black uppercase tracking-[0.2em] mb-4 italic">Collaborator • Engineer</p>
+                   <div className="text-gray-500 text-[10px] font-medium italic opacity-60 leading-relaxed truncate px-2">"Logic engineer and core system collaborator."</div>
+                </div>
+                <div className="mt-8">
+                   <a href="https://github.com/shobhit98176" target="_blank" className="block text-[9px] font-black text-white/20 uppercase tracking-widest italic group-hover:text-orange-400 transition-colors hover:scale-105">@shobhit98176</a>
+                </div>
              </div>
           </div>
         </div>
