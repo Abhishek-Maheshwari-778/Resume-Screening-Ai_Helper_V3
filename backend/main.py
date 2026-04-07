@@ -32,9 +32,10 @@ def _validate_env():
         # Warn but don't exit — allows partial dev usage
     weak_key = "your-super-secret-jwt-key"
     if os.environ.get("SECRET_KEY", "").startswith(weak_key):
-        print("\n⚠️  SECURITY WARNING: SECRET_KEY is still the default placeholder!")
+        print("\nSECURITY WARNING: SECRET_KEY is still the default placeholder!")
         print("   Generate a real key: python -c \"import secrets; print(secrets.token_hex(64))\"")
-        print("   A weak JWT secret allows anyone to forge admin tokens.\n")
+    # Startup logic
+    print("Initializing Neural Intelligence Matrix (Backend startup)...")
 
 _validate_env()
 
@@ -141,7 +142,7 @@ app.include_router(admin.router, prefix="/api/admin", tags=["Admin"])
 
 @app.get("/")
 async def root():
-    return {"message": "AI Resume Platform v2.0", "status": "running", "docs": "/docs"}
+    return {"message": "AI Resume Platform v3.0", "status": "running", "docs": "/docs"}
 
 
 @app.get("/health")

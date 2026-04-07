@@ -38,11 +38,11 @@ class Database:
             db_name = url_path.split('?')[0] or 'resume_platform'
             self.database = self.client[db_name]
 
-            print(f"✅ Connected to MongoDB: {db_name}")
+            print(f"Connected to MongoDB: {db_name}")
             return True
 
         except Exception as e:
-            print(f"❌ Failed to connect to MongoDB: {e}")
+            print(f"Failed to connect to MongoDB: {e}")
             return False
 
     async def disconnect(self):
@@ -105,10 +105,10 @@ class Database:
                 "updated_at": {"$lt": cutoff_date},
                 "is_active": False
             })
-            print(f"✅ Cleaned up {result.deleted_count} old inactive resumes")
+            print(f"Cleaned up {result.deleted_count} old inactive resumes")
             return True
         except Exception as e:
-            print(f"⚠️ Cleanup skipped: {e}")
+            print(f"Cleanup skipped: {e}")
             return False
 
 
