@@ -61,9 +61,10 @@ npm run dev
 
 ## 👥 Foundational Architects
 
-- **Govind Gupta** (@Govind-gupta243) — **Lead Architect & Visionary**
+- **Abhishek Maheshwari** — **Lead Visionary & Innovation Engineer**
+- **Govind Gupta** (@Govind-gupta243) — **Lead Architect & Neural Strategist**
 - **Khushi Gupta** (@happycode290) — **Collaborator & Logic Engineer**
-- **Pallal** (@pallal) — **Collaborator & Interface Strategist**
+- **Pallal** (@pallal) — **Collaborator & Interface Architect**
 
 ---
 

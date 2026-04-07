@@ -449,14 +449,13 @@ const ErrorBanner: React.FC<{ message: string }> = ({ message }) => (
 const DemoSection: React.FC<{ onDemo: (email: string, password: string) => void; isLoading: boolean }> = ({ onDemo, isLoading }) => (
   <div className="bg-white/3 border border-white/8 rounded-2xl p-4">
     <div className="flex items-center gap-2 mb-3">
-      <span className="text-gray-500 text-xs">🛡️</span>
-      <p className="text-gray-500 text-xs font-medium">Verified Portal Access</p>
+      <p className="text-gray-500 text-xs font-medium uppercase tracking-widest">Verified Portal Access</p>
     </div>
     <div className="grid grid-cols-3 gap-2">
       {[
-        { label: 'Admin', email: 'admin@resume.ai', password: 'Admin@123', gradient: 'from-red-600 to-pink-600', icon: '🛡️' },
-        { label: 'HR', email: 'hr@techcorp.com', password: 'Hr@12345', gradient: 'from-emerald-600 to-green-600', icon: '🎯' },
-        { label: 'Candidate', email: 'john@example.com', password: 'Cand@123', gradient: 'from-blue-600 to-cyan-600', icon: '👤' },
+        { label: 'Admin', email: 'admin@resume.ai', password: 'Admin@123', gradient: 'from-red-600 to-pink-600' },
+        { label: 'HR', email: 'hr@techcorp.com', password: 'Hr@12345', gradient: 'from-emerald-600 to-green-600' },
+        { label: 'Candidate', email: 'john@example.com', password: 'Cand@123', gradient: 'from-blue-600 to-cyan-600' },
       ].map(d => (
         <button
           key={d.label}
@@ -465,8 +464,8 @@ const DemoSection: React.FC<{ onDemo: (email: string, password: string) => void;
           className={`flex flex-col items-center gap-1.5 py-3 rounded-xl bg-gradient-to-br ${d.gradient} bg-opacity-10 border border-white/10 hover:border-white/20 transition-all hover:scale-[1.03] disabled:opacity-50`}
           style={{ background: 'transparent' }}
         >
-          <div className={`w-7 h-7 rounded-lg bg-gradient-to-br ${d.gradient} flex items-center justify-center text-sm shadow-sm`}>
-            {d.icon}
+          <div className={`w-7 h-7 rounded-lg bg-gradient-to-br ${d.gradient} flex items-center justify-center text-xs shadow-sm font-bold text-white`}>
+            {d.label[0]}
           </div>
           <span className="text-white text-xs font-medium">{d.label}</span>
         </button>

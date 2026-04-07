@@ -109,7 +109,16 @@ const About: React.FC = () => {
              <h3 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase italic leading-none">THE MINDS BEHIND <br /><span className="text-primary">THE MATRIX</span></h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+             <div className="bg-[#0b0e14] border border-[var(--border-color)] rounded-[3rem] p-10 text-center group hover:border-blue-500/50 transition-all shadow-2xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-[40px] opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="w-24 h-24 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-[2rem] flex items-center justify-center text-4xl mb-8 mx-auto shadow-2xl group-hover:rotate-12 transition-transform italic border-4 border-white/5">💎</div>
+                <h4 className="text-white font-black text-xl mb-2 tracking-tight uppercase italic">Abhishek Maheshwari</h4>
+                <p className="text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-6 italic">Chief Innovation Architect</p>
+                <div className="text-gray-500 text-[11px] font-medium italic opacity-60">"Visionary behind the platform's strategic evolution and architectural logic."</div>
+                <div className="mt-8 text-[10px] font-black text-white/20 uppercase tracking-widest italic group-hover:text-blue-400 transition-colors">@Abhishek-Maheshwari-778</div>
+             </div>
+
              <div className="bg-[#0b0e14] border border-[var(--border-color)] rounded-[3rem] p-10 text-center group hover:border-primary/50 transition-all shadow-2xl relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-[40px] opacity-0 group-hover:opacity-100 transition-opacity" />
                 <div className="w-24 h-24 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-[2rem] flex items-center justify-center text-4xl mb-8 mx-auto shadow-2xl group-hover:rotate-12 transition-transform italic border-4 border-white/5">👑</div>
@@ -130,7 +139,7 @@ const About: React.FC = () => {
 
              <div className="bg-[#0b0e14] border border-[var(--border-color)] rounded-[3rem] p-10 text-center group hover:border-violet-500/50 transition-all shadow-2xl relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-violet-500/5 rounded-full blur-[40px] opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="w-24 h-24 bg-gradient-to-br from-violet-600 to-purple-500 rounded-[2rem] flex items-center justify-center text-4xl mb-8 mx-auto shadow-2xl group-hover:rotate-6 transition-transform italic border-4 border-white/5">🛡️</div>
+                <div className="w-24 h-24 bg-gradient-to-br from-violet-600 to-purple-500 rounded-[2rem] flex items-center justify-center text-4xl mb-8 mx-auto shadow-2xl group-hover:rotate-6 transition-transform italic border-4 border-white/5">🗝️</div>
                 <h4 className="text-white font-black text-xl mb-2 tracking-tight uppercase italic">Pallal</h4>
                 <p className="text-violet-400 text-[10px] font-black uppercase tracking-[0.2em] mb-6 italic">Collaborator</p>
                 <div className="text-gray-500 text-[11px] font-medium italic opacity-60">"Security strategist and interface logic collaborator."</div>
