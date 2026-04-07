@@ -104,10 +104,11 @@ app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 
-# Vercel compatibility: Same-origin requests work, but allowing all for safety on dynamic domains
+# FIX: Wildcard ["*"] cannot be used with allow_credentials=True
+# We now use the list of trusted origins
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # Simplified for Vercel deployment success
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
