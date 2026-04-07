@@ -1,4 +1,4 @@
-# Core packages duplicated from backend/requirements.txt
+# Core packages (Minimum required for Vercel)
 fastapi==0.115.0
 pydantic==2.9.2
 pydantic-settings==2.5.2
@@ -7,19 +7,12 @@ python-jose[cryptography]==3.3.0
 python-multipart==0.0.12
 python-dotenv==1.0.1
 pypdf==5.1.0
-pdfminer.six
 python-docx==1.1.2
 passlib[bcrypt]==1.7.4
-firebase-admin==6.5.0
 openai==1.51.0
-weasyprint==62.3
 Pillow==11.0.0
 jinja2==3.1.4
 aiofiles==24.1.0
 slowapi==0.1.9
 groq
-spacy
-scikit-learn
-
-# Direct link for spaCy model to ensure it installs on Vercel
-https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl
+# spacy and sklearn removed to stay under 500MB Vercel limit
