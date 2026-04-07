@@ -16,4 +16,7 @@ aiofiles==24.1.0
 slowapi==0.1.9
 groq
 dnspython
+httpx
+certifi
+pdfminer.six
 # spacy and sklearn removed to stay under 500MB Vercel limit

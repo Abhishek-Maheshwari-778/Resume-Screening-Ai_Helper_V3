@@ -1,30 +1,27 @@
 import re
 import os
 
-# Try to load spaCy model
+# Safe imports for Serverless/Vercel (Mocks heavy libraries)
+nlp = None
+SKLEARN_AVAILABLE = False
+
 try:
     import spacy
-    try:
-        import en_core_web_sm
-        nlp = en_core_web_sm.load()
-    except Exception:
+    # Only try to load if we're likely in a local environment with enough RAM
+    if os.environ.get("ENVIRONMENT") != "production":
         try:
             nlp = spacy.load("en_core_web_sm")
-        except Exception:
-            nlp = None
-            print(" spaCy model not found. Using regex fallback only.")
+        except:
+            pass
 except ImportError:
-    nlp = None
-    print(" spaCy not installed. Using regex fallback only.")
+    pass
 
-# Try to load sklearn for TF-IDF
 try:
     from sklearn.feature_extraction.text import TfidfVectorizer
     from sklearn.metrics.pairwise import cosine_similarity
     SKLEARN_AVAILABLE = True
 except ImportError:
-    SKLEARN_AVAILABLE = False
-    print(" scikit-learn not installed. Keyword-only matching will be used.")
+    pass
 
 
 # 
