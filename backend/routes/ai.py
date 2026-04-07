@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends, UploadFile, File, Form, status, Request
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
 from typing import List, Optional, Dict, Any
@@ -632,13 +632,16 @@ async def analyze_public(
 
         return result
 
-    except HTTPException:
-        raise
+    except HTTPException as e:
+        raise e
     except Exception as e:
+        print(f"FATAL ERROR in analyze-public: {str(e)}")
         import traceback
-        print(f" Unexpected analyze-public error: {str(e)}")
         traceback.print_exc()
-        raise HTTPException(status_code=500, detail=f"Analysis error: {str(e)}")
+        return JSONResponse(
+            status_code=500,
+            content={"error": "Internal Server Error", "detail": str(e)}
+        )
 
 
 
