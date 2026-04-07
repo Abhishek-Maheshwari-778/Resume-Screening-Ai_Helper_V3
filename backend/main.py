@@ -154,10 +154,12 @@ async def root():
 
 @app.get("/api/health")
 async def health():
-    print("Health check reached!")
+    from database.database import db
+    db_status = "connected" if db.database is not None else "disconnected"
     return {
         "status": "healthy",
+        "database": db_status,
         "environment": os.environ.get("ENVIRONMENT", "development"),
-        "version": "2.0.0",
+        "version": "4.0.0",
         "allowed_origins": ALLOWED_ORIGINS
     }
