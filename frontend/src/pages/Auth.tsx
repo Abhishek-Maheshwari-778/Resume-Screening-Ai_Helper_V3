@@ -35,11 +35,7 @@ const ROLES: RoleOption[] = [
   },
 ];
 
-const DEMO_ACCOUNTS = [
-  { label: 'Admin', email: 'admin@resume.ai', password: 'Admin@123', gradient: 'from-red-500 to-pink-500', icon: '🛡️' },
-  { label: 'HR', email: 'hr@techcorp.com', password: 'Hr@12345', gradient: 'from-emerald-500 to-green-500', icon: '🎯' },
-  { label: 'Candidate', email: 'john@example.com', password: 'Cand@123', gradient: 'from-blue-500 to-cyan-500', icon: '👤' },
-];
+
 
 const Auth: React.FC = () => {
   const navigate = useNavigate();
@@ -110,11 +106,7 @@ const Auth: React.FC = () => {
     }
   };
 
-  const handleDemoLogin = async (email: string, password: string) => {
-    setForm(f => ({ ...f, email, password }));
-    setStep('login');
-    await handleEmailLogin(email, password);
-  };
+
 
   // ─── Left panel (branding) ────────────────────────────────────────────────
   const LeftPanel = () => (
@@ -236,8 +228,7 @@ const Auth: React.FC = () => {
                 <span className="text-gray-500 cursor-pointer hover:text-gray-300 transition-colors">Privacy Policy</span>
               </p>
 
-              {/* Demo logins */}
-              <DemoSection onDemo={handleDemoLogin} isLoading={isLoading} />
+
             </div>
           )}
 
@@ -420,7 +411,7 @@ const Auth: React.FC = () => {
                 <button onClick={() => setStep('select')} className="text-blue-400 hover:text-blue-300 font-medium transition-colors">Create one free</button>
               </p>
 
-              <DemoSection onDemo={handleDemoLogin} isLoading={isLoading} />
+
             </div>
           )}
         </div>
@@ -446,33 +437,7 @@ const ErrorBanner: React.FC<{ message: string }> = ({ message }) => (
   </div>
 );
 
-const DemoSection: React.FC<{ onDemo: (email: string, password: string) => void; isLoading: boolean }> = ({ onDemo, isLoading }) => (
-  <div className="bg-white/3 border border-white/8 rounded-2xl p-4">
-    <div className="flex items-center gap-2 mb-3">
-      <p className="text-gray-500 text-xs font-medium uppercase tracking-widest">Verified Portal Access</p>
-    </div>
-    <div className="grid grid-cols-3 gap-2">
-      {[
-        { label: 'Admin', email: 'admin@resume.ai', password: 'Admin@123', gradient: 'from-red-600 to-pink-600' },
-        { label: 'HR', email: 'hr@techcorp.com', password: 'Hr@12345', gradient: 'from-emerald-600 to-green-600' },
-        { label: 'Candidate', email: 'john@example.com', password: 'Cand@123', gradient: 'from-blue-600 to-cyan-600' },
-      ].map(d => (
-        <button
-          key={d.label}
-          onClick={() => onDemo(d.email, d.password)}
-          disabled={isLoading}
-          className={`flex flex-col items-center gap-1.5 py-3 rounded-xl bg-gradient-to-br ${d.gradient} bg-opacity-10 border border-white/10 hover:border-white/20 transition-all hover:scale-[1.03] disabled:opacity-50`}
-          style={{ background: 'transparent' }}
-        >
-          <div className={`w-7 h-7 rounded-lg bg-gradient-to-br ${d.gradient} flex items-center justify-center text-xs shadow-sm font-bold text-white`}>
-            {d.label[0]}
-          </div>
-          <span className="text-white text-xs font-medium">{d.label}</span>
-        </button>
-      ))}
-    </div>
-  </div>
-);
+
 
 const GoogleIcon = () => (
   <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24">
