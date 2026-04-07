@@ -31,12 +31,6 @@ class Database:
 
             self.client = AsyncIOMotorClient(settings.MONGODB_URL, **mongo_kwargs)
             
-            # Test connection with short timeout - non-fatal
-            try:
-                await asyncio.wait_for(self.client.admin.command('ping'), timeout=3.0)
-            except Exception:
-                print("⚠️  Warning: Initial MongoDB ping timed out. Proceeding anyway.")
-
             # Parse database name from URL (handle query params like ?retryWrites=true)
             url_path = settings.MONGODB_URL.split('/')[-1]
             db_name = url_path.split('?')[0] or 'resume_platform'
@@ -53,7 +47,7 @@ class Database:
         """Close MongoDB connection"""
         if self.client:
             self.client.close()
-            print("✅ Disconnected from MongoDB")
+            print(" Disconnected from MongoDB")
 
     async def get_db(self) -> AsyncIOMotorDatabase:
         """Get database instance, attempting to connect if not ready"""
@@ -97,7 +91,7 @@ class Database:
             except Exception:
                 pass  # Non-fatal: Atlas M0 restricts index counts
 
-        print("✅ Database indexes configured")
+        print(" Database indexes configured")
         return True
 
     async def cleanup_old_data(self, days: int = 30):
@@ -134,10 +128,12 @@ async def get_database():
 
 
 async def init_database():
-    """Initialize database connection and indexes"""
+    """Initialize database connection and indexes (in background)"""
     success = await db.connect()
     if success:
-        await db.create_indexes()
+        # Create indexes in background so startup isn't blocked
+        import asyncio
+        asyncio.create_task(db.create_indexes())
     return success
 
 

@@ -7,7 +7,7 @@ import io
 import os
 import re
 
-# ── PDF Libraries (try all) ────────────────────────────────────────────────────
+#  PDF Libraries (try all) 
 PYPDF_AVAILABLE = False
 PYPDF2_AVAILABLE = False
 PDFMINER_AVAILABLE = False
@@ -37,7 +37,7 @@ try:
 except ImportError:
     pass
 
-# ── DOCX Library ───────────────────────────────────────────────────────────────
+#  DOCX Library 
 DOCX_AVAILABLE = False
 try:
     import docx
@@ -70,7 +70,7 @@ def extract_text_from_pdf(file_bytes: bytes) -> str:
     # 1. Try pypdf (Primary - most stable)
     if PYPDF_AVAILABLE:
         try:
-            print("📄 Attempting pypdf...")
+            print(" Attempting pypdf...")
             reader = PyPdfReader(io.BytesIO(file_bytes))
             pages = []
             for page in reader.pages:
@@ -78,55 +78,55 @@ def extract_text_from_pdf(file_bytes: bytes) -> str:
                 if txt: pages.append(txt)
             text = "\n".join(pages)
             if text and len(text.strip()) > 30:
-                print(f"✅ pypdf success: {len(text)} chars")
+                print(f" pypdf success: {len(text)} chars")
                 return _clean_text(text)
         except Exception as e:
-            print(f"⚠️ pypdf failed: {e}")
+            print(f" pypdf failed: {e}")
 
     # 2. Try fitz (Secondary - high fidelity)
     if FITZ_AVAILABLE:
         try:
-            print("📄 Attempting fitz deep-scan...")
+            print(" Attempting fitz deep-scan...")
             with fitz.open(stream=file_bytes, filetype="pdf") as doc:
                 text = "\n".join([page.get_text() for page in doc])
             if text and len(text.strip()) > 30:
-                print(f"✅ fitz success: {len(text)} chars")
+                print(f" fitz success: {len(text)} chars")
                 return _clean_text(text)
         except Exception as e:
-            print(f"⚠️ fitz failed: {e}")
+            print(f" fitz failed: {e}")
 
     # 3. Try PyPDF2
     if PYPDF2_AVAILABLE:
         try:
-            print("📄 Attempting PyPDF2 fallback...")
+            print(" Attempting PyPDF2 fallback...")
             reader = PyPDF2.PdfReader(io.BytesIO(file_bytes))
             text = "\n".join([p.extract_text() or "" for p in reader.pages])
             if text and len(text.strip()) > 30:
-                print(f"✅ PyPDF2 success: {len(text)} chars")
+                print(f" PyPDF2 success: {len(text)} chars")
                 return _clean_text(text)
         except Exception as e:
-            print(f"⚠️ PyPDF2 failed: {e}")
+            print(f" PyPDF2 failed: {e}")
 
     # 4. Try pdfminer
     if PDFMINER_AVAILABLE:
         try:
-            print("📄 Attempting pdfminer fallback...")
+            print(" Attempting pdfminer fallback...")
             text = pdfminer_extract(io.BytesIO(file_bytes))
             if text and len(text.strip()) > 30:
-                print(f"✅ pdfminer success: {len(text)} chars")
+                print(f" pdfminer success: {len(text)} chars")
                 return _clean_text(text)
         except Exception as e:
-            print(f"⚠️ pdfminer failed: {e}")
+            print(f" pdfminer failed: {e}")
 
     # 5. SUPER-FALLBACK: Brute-force stream recovery
-    print("🔮 Running PDF brute-force recovery...")
+    print(" Running PDF brute-force recovery...")
     try:
         raw_text = file_bytes.decode('latin-1', errors='replace')
         # PDF streams often contain text in parentheses
         parts = re.findall(r'\((.*?)\)', raw_text)
         candidate = " ".join([p for p in parts if len(p) > 5])
         if len(candidate) > 20:
-             print(f"✅ Brute-force recovery success: {len(candidate)} chars")
+             print(f" Brute-force recovery success: {len(candidate)} chars")
              return _clean_text(candidate)
     except:
         pass
@@ -243,7 +243,7 @@ def extract_text(file_bytes: bytes, filename: str) -> str:
     elif ext == '.txt':
         text = extract_text_from_txt(file_bytes)
     else:
-        # Unknown extension — try fallbacks
+        # Unknown extension  try fallbacks
         text = (
             extract_text_from_pdf(file_bytes) or
             extract_text_from_docx(file_bytes) or
@@ -251,8 +251,8 @@ def extract_text(file_bytes: bytes, filename: str) -> str:
         )
 
     if not text or len(text.strip()) < 10:
-        print(f"⚠️ Extraction failed for: {filename}")
+        print(f" Extraction failed for: {filename}")
         return ""
 
-    print(f"✅ Extracted {len(text)} chars from {filename}")
+    print(f" Extracted {len(text)} chars from {filename}")
     return text

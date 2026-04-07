@@ -26,10 +26,10 @@ REQUIRED_ENV_VARS = [
 def _validate_env():
     missing = [v for v in REQUIRED_ENV_VARS if not os.environ.get(v)]
     if missing:
-        print(f"\n❌ STARTUP ERROR: Missing required environment variables: {missing}")
+        print(f"\n STARTUP ERROR: Missing required environment variables: {missing}")
         print("   Please set these in your backend/.env file.")
         print("   Refer to backend/.env.example for a template.\n")
-        # Warn but don't exit — allows partial dev usage
+        # Warn but don't exit  allows partial dev usage
     weak_key = "your-super-secret-jwt-key"
     if os.environ.get("SECRET_KEY", "").startswith(weak_key):
         print("\nSECURITY WARNING: SECRET_KEY is still the default placeholder!")
@@ -37,7 +37,7 @@ def _validate_env():
     # Startup logic
     print("Initializing Neural Intelligence Matrix (Backend startup)...")
 
-_validate_env()
+# Startup logic moved to lifespan
 
 
 # ---- CORS Origins ------------------------------------------------------------
@@ -86,19 +86,21 @@ async def lifespan(app: FastAPI):
     
     # PROD-SEED: If database is empty, seed with demo users
     from database.database import db
-    user_count = await db.users.count_documents({})
+    if db.database is not None:
+        user_count = await db.database.users.count_documents({})
+        print(f"Database active. Total users: {user_count}")
     if user_count == 0:
-        print("   🌱 Empty database detected! Auto-seeding demo users...")
+        print("    Empty database detected! Auto-seeding demo users...")
         try:
             from seed_full import seed_database
             await seed_database(db)
-            print("   ✅ Production seeding successful.")
+            print("    Production seeding successful.")
         except Exception as e:
-            print(f"   ⚠️ Auto-seeding failed: {e}")
+            print(f"    Auto-seeding failed: {e}")
             
-    print("   ✅ Database initialized\n")
+    print("    Database initialized\n")
     yield
-    print("\n🛑 AI Resume Platform shutting down...\n")
+    print("\n AI Resume Platform shutting down...\n")
 
 
 # ---- Rate Limiting (SlowAPI) -------------------------------------------------
@@ -147,6 +149,7 @@ async def root():
 
 @app.get("/health")
 async def health():
+    print("Health check reached!")
     return {
         "status": "healthy",
         "environment": os.environ.get("ENVIRONMENT", "development"),

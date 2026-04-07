@@ -70,7 +70,7 @@ class ScreeningResult(BaseModel):
     ai_summary: Optional[str] = None
 
 
-# ─── Routes ────────────────────────────────────────────────────────────────────
+#  Routes 
 
 import hashlib
 from datetime import datetime
@@ -192,7 +192,7 @@ async def screen_resumes(
     HR Feature: Bulk resume screening.
     Upload multiple resumes and a JD to get ranked candidates.
     Uses NLP (spaCy NER) + TF-IDF + Keyword matching.
-    Always returns results — failed files are listed separately.
+    Always returns results  failed files are listed separately.
     """
     if current_user.role not in ("hr", "employer", "enterprise", "admin"):
         raise HTTPException(
@@ -217,7 +217,7 @@ async def screen_resumes(
             
             # 2. INTEL-FALLBACK: If local extraction is poor (e.g. name Unknown), use AI
             if details.get('name') == 'Unknown' or not details.get('email'):
-                print(f"🧠 AI Extraction Fallback: {file.filename}")
+                print(f" AI Extraction Fallback: {file.filename}")
                 groq = GroqService()
                 ai_details = await groq.extract_resume_details_ai(text)
                 if ai_details and ai_details.get('name'):
@@ -413,7 +413,7 @@ async def ai_chat(
     If the user asks about technical features, mention our ATS Checker (DeepSeek) and Bulk Screening tools.
     """
     
-    # FIX: Normalize history keys — support both {role/text} and {role/content} formats
+    # FIX: Normalize history keys  support both {role/text} and {role/content} formats
     hist_lines = []
     for h in history[-5:]:
         role = h.get('role', 'user')
@@ -475,7 +475,7 @@ async def analyze_public(
         if len(file_bytes) == 0:
             raise HTTPException(status_code=400, detail="The uploaded file appears to be empty.")
 
-        # ── Cache Check ───────────────────────────────────────────────────────
+        #  Cache Check 
         import hashlib
         hasher = hashlib.sha256()
         hasher.update(b"public_v3:")
@@ -486,10 +486,10 @@ async def analyze_public(
 
         cached = await db.ai_cache.find_one({"_id": content_hash})
         if cached and cached.get("result"):
-            print(f"📦 Cache Hit: {content_hash[:16]}")
+            print(f" Cache Hit: {content_hash[:16]}")
             return cached["result"]
 
-        # ── Text Extraction ───────────────────────────────────────────────────
+        #  Text Extraction 
         from ai.parser_service import extract_text as parse_text, extract_sections
         text = parse_text(file_bytes, fname)
 
@@ -503,10 +503,10 @@ async def analyze_public(
                 )
             )
 
-        print(f"🧠 Analyzing: {fname} ({len(text)} chars)")
+        print(f" Analyzing: {fname} ({len(text)} chars)")
         sections = extract_sections(text)
 
-        # ── Step 1: Try Groq (primary AI — DeepSeek expired) ─────────────────
+        #  Step 1: Try Groq (primary AI  DeepSeek expired) 
         analysis = None
         ai_used = False
         try:
@@ -515,10 +515,10 @@ async def analyze_public(
             if raw and isinstance(raw.get("score"), (int, float)):
                 analysis = raw
                 ai_used = True
-                print(f"✅ Groq AI analysis done. Score: {analysis['score']}")
+                print(f" Groq AI analysis done. Score: {analysis['score']}")
         except Exception as ai_err:
-            print(f"⚠️ Groq failed, trying DeepSeek: {ai_err}")
-            # ── Step 1b: DeepSeek fallback (if key is valid) ─────────────────
+            print(f" Groq failed, trying DeepSeek: {ai_err}")
+            #  Step 1b: DeepSeek fallback (if key is valid) 
             try:
                 from ai.deepseek_service import DeepSeekService
                 ds = DeepSeekService()
@@ -526,15 +526,15 @@ async def analyze_public(
                 if raw and isinstance(raw.get("score"), (int, float)) and raw.get("score") != 70.0:
                     analysis = raw
                     ai_used = True
-                    print(f"✅ DeepSeek fallback done. Score: {analysis['score']}")
+                    print(f" DeepSeek fallback done. Score: {analysis['score']}")
             except Exception as ds_err:
-                print(f"⚠️ DeepSeek also failed (local NLP fallback): {ds_err}")
+                print(f" DeepSeek also failed (local NLP fallback): {ds_err}")
 
 
 
-        # ── Step 2: Local NLP Fallback ────────────────────────────────────────
+        #  Step 2: Local NLP Fallback 
         if not analysis:
-            print("🔧 Running local NLP fallback...")
+            print(" Running local NLP fallback...")
             from ai.nlp_service import extract_details, calculate_weighted_score
             details = extract_details(text)
             skills_by_cat = details.get('skills', {})
@@ -569,7 +569,7 @@ async def analyze_public(
                 strengths.append(f"{len(matched)} skills match the job description")
 
             if not details.get('email'):
-                weaknesses.append("No email address detected — ensure contact info is included")
+                weaknesses.append("No email address detected  ensure contact info is included")
             if details.get('experience', 'Not Specified') == 'Not Specified':
                 weaknesses.append("Work experience duration not clearly specified")
             if len(tech_skills) < 3:
@@ -577,7 +577,7 @@ async def analyze_public(
             if not details.get('titles'):
                 weaknesses.append("Add a clear job title / professional headline")
             if score < 60:
-                weaknesses.append("Low ATS match — tailor this resume for the specific role")
+                weaknesses.append("Low ATS match  tailor this resume for the specific role")
 
             if not strengths:
                 strengths = ["Resume is readable by ATS parsers", "File processed successfully"]
@@ -620,7 +620,7 @@ async def analyze_public(
             }
         }
 
-        # ── Store in Cache ────────────────────────────────────────────────────
+        #  Store in Cache 
         try:
             await db.ai_cache.update_one(
                 {"_id": content_hash},
@@ -636,7 +636,7 @@ async def analyze_public(
         raise
     except Exception as e:
         import traceback
-        print(f"❌ Unexpected analyze-public error: {str(e)}")
+        print(f" Unexpected analyze-public error: {str(e)}")
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Analysis error: {str(e)}")
 
@@ -696,7 +696,7 @@ async def hr_list_candidates(
         raw_text = r.get("raw_text", "")
         skills_raw = r.get("extracted_skills", {})
 
-        # FIX-4: extracted_skills is a dict — extract if missing, then flatten properly
+        # FIX-4: extracted_skills is a dict  extract if missing, then flatten properly
         if not skills_raw and raw_text:
             skills_raw = extract_skills(raw_text)
 
@@ -781,7 +781,7 @@ async def hr_semantic_search(
 
 
 
-# ─── Cover Letter Endpoint ───────────────────────────────────────────────────
+#  Cover Letter Endpoint 
 
 class CoverLetterRequest(BaseModel):
     resume_text: str
@@ -989,7 +989,7 @@ RESUME CONTENT:
         response = await groq.chat_completion(messages, max_tokens=800)
         return {"response": response}
     except Exception as e:
-        print(f"❌ Chat with Resume error: {e}")
+        print(f" Chat with Resume error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/generate-jd")

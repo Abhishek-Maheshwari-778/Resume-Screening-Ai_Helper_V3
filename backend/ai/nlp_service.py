@@ -12,10 +12,10 @@ try:
             nlp = spacy.load("en_core_web_sm")
         except Exception:
             nlp = None
-            print("⚠️ spaCy model not found. Using regex fallback only.")
+            print(" spaCy model not found. Using regex fallback only.")
 except ImportError:
     nlp = None
-    print("⚠️ spaCy not installed. Using regex fallback only.")
+    print(" spaCy not installed. Using regex fallback only.")
 
 # Try to load sklearn for TF-IDF
 try:
@@ -24,12 +24,12 @@ try:
     SKLEARN_AVAILABLE = True
 except ImportError:
     SKLEARN_AVAILABLE = False
-    print("⚠️ scikit-learn not installed. Keyword-only matching will be used.")
+    print(" scikit-learn not installed. Keyword-only matching will be used.")
 
 
-# ─────────────────────────────────────────────────────────────────
+# 
 #  EXTRACTORS
-# ─────────────────────────────────────────────────────────────────
+# 
 
 def extract_name(text: str) -> str:
     if nlp:
@@ -71,7 +71,7 @@ def extract_experience(text: str) -> str:
         
     # 2. Heuristically calculate total years from date ranges (e.g. 2018 - 2021)
     # Match pairs of years or year-to-present
-    range_pattern = r'\b(19\d{2}|20\d{2})\b\s*[-–—to]+\s*(Present|Current|\b19\d{2}\b|\b20\d{2}\b)'
+    range_pattern = r'\b(19\d{2}|20\d{2})\b\s*[-to]+\s*(Present|Current|\b19\d{2}\b|\b20\d{2}\b)'
     matches = re.findall(range_pattern, text, re.I)
     
     total_years = 0
@@ -151,7 +151,7 @@ def extract_job_titles(text: str) -> list:
     return list(set(found))
 
 
-# ─── Skill Aliases — maps alternate names to canonical names ─────────────────
+#  Skill Aliases  maps alternate names to canonical names 
 # So "JS" matches "javascript", "Postgres" matches "postgresql", etc.
 SKILL_ALIASES = {
     "js": "javascript",
@@ -313,9 +313,9 @@ def extract_details(text: str, catalog: dict = None) -> dict:
     return details
 
 
-# ─────────────────────────────────────────────────────────────────
+# 
 #  MATCHING / SCORING (TF-IDF + Keyword)
-# ─────────────────────────────────────────────────────────────────
+# 
 
 BACKGROUND_CORPUS = [
     "software engineer python java sql javascript cloud architecture deployment",

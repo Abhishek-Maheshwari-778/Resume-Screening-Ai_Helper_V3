@@ -197,7 +197,7 @@ class AuthService:
             return None
 
 
-# ─── FastAPI dependency ──────────────────────────────────────────────────────
+#  FastAPI dependency 
 
 async def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(security),
