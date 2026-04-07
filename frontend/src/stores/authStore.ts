@@ -44,7 +44,7 @@ interface AuthActions {
   refreshProfile: () => Promise<void>;
 }
 
-const API = 'http://127.0.0.1:8000';
+const API = import.meta.env.PROD ? '' : 'http://127.0.0.1:8000';
 // Note: If API is '', then calls are relative. For local dev, Vite handles the proxy or you can set VITE_API_URL=http://localhost:8000 in your .env.local file.
 
 
