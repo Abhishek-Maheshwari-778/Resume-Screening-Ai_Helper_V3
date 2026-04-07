@@ -29,9 +29,12 @@ class Database:
                 mongo_kwargs["tlsAllowInvalidCertificates"] = True
 
             self.client = AsyncIOMotorClient(settings.MONGODB_URL, **mongo_kwargs)
-
-            # Test connection
-            await self.client.admin.command('ping')
+            
+            # Test connection with short timeout - non-fatal
+            try:
+                await asyncio.wait_for(self.client.admin.command('ping'), timeout=3.0)
+            except Exception:
+                print("⚠️  Warning: Initial MongoDB ping timed out. Proceeding anyway.")
 
             # Parse database name from URL (handle query params like ?retryWrites=true)
             url_path = settings.MONGODB_URL.split('/')[-1]

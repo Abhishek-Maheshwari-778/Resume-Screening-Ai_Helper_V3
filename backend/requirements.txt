@@ -25,3 +25,4 @@ slowapi==0.1.9
 groq
 spacy
 scikit-learn
+dnspython
