@@ -67,17 +67,8 @@ EDUCATION:
 BS in Computer Science, University of Technology (2014 - 2018)
 """
 
-async def seed():
-    client = AsyncIOMotorClient(MONGODB_URL)
-    db_name = MONGODB_URL.split("/")[-1].split("?")[0] or "resume_platform"
-    db = client[db_name]
-
-    print("🧹 Cleaning collections...")
-    await db.users.delete_many({})
-    await db.resumes.delete_many({})
-    await db.jobs.delete_many({})
-    await db.applications.delete_many({})
-
+async def seed_database(db):
+    """Seed the provided database instance with demo data."""
     print("👤 Seeding Users...")
     user_docs = []
     for u in DEMO_USERS:
@@ -90,7 +81,8 @@ async def seed():
             "company": u.get("company"),
             "is_active": True,
             "onboarding_complete": True,
-            "created_at": datetime.utcnow()
+            "created_at": datetime.utcnow(),
+            "last_login": datetime.utcnow()
         })
     res_users = await db.users.insert_many(user_docs)
     john_id = str(res_users.inserted_ids[2])
@@ -120,9 +112,24 @@ async def seed():
         "updated_at": datetime.utcnow()
     }
     await db.resumes.insert_one(resume_doc)
-
     print("✅ Full Seeding Complete!")
+
+async def seed():
+    client = AsyncIOMotorClient(MONGODB_URL)
+    db_name = MONGODB_URL.split("/")[-1].split("?")[0] or "resume_platform"
+    db = client[db_name]
+
+    print("🧹 Cleaning collections...")
+    await db.users.delete_many({})
+    await db.resumes.delete_many({})
+    await db.jobs.delete_many({})
+    await db.applications.delete_many({})
+
+    await seed_database(db)
     client.close()
+
+if __name__ == "__main__":
+    asyncio.run(seed())
 
 if __name__ == "__main__":
     asyncio.run(seed())

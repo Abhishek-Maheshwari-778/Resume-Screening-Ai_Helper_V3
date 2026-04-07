@@ -82,6 +82,19 @@ async def lifespan(app: FastAPI):
     print(f"   Environment: {os.environ.get('ENVIRONMENT', 'development')}")
     print(f"   Allowed Origins: {ALLOWED_ORIGINS}")
     await init_database()
+    
+    # PROD-SEED: If database is empty, seed with demo users
+    from database.database import db
+    user_count = await db.users.count_documents({})
+    if user_count == 0:
+        print("   🌱 Empty database detected! Auto-seeding demo users...")
+        try:
+            from seed_full import seed_database
+            await seed_database(db)
+            print("   ✅ Production seeding successful.")
+        except Exception as e:
+            print(f"   ⚠️ Auto-seeding failed: {e}")
+            
     print("   ✅ Database initialized\n")
     yield
     print("\n🛑 AI Resume Platform shutting down...\n")
