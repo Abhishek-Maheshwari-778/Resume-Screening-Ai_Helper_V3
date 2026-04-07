@@ -52,9 +52,16 @@ class Database:
             print("✅ Disconnected from MongoDB")
 
     async def get_db(self) -> AsyncIOMotorDatabase:
-        """Get database instance"""
+        """Get database instance, attempting to connect if not ready"""
         if self.database is None:
-            raise RuntimeError("Database not initialized. Call connect() first.")
+            # Fallback for code calling db.get_db() outside of FastAPI dependencies
+            success = await self.connect()
+            if not success:
+                from fastapi import HTTPException
+                raise HTTPException(
+                    status_code=503, 
+                    detail="Database connection failed. Ensure MONGODB_URL is valid."
+                )
         return self.database
 
     async def create_indexes(self):
