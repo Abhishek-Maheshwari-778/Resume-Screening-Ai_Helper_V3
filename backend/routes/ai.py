@@ -632,6 +632,8 @@ async def analyze_public(
 
         return result
 
+    except HTTPException:
+        raise
     except HTTPException as e:
         raise e
     except Exception as e:

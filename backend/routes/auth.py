@@ -46,27 +46,17 @@ async def google_auth(body: GoogleAuthRequest):
     Accepts Firebase id_token, creates or finds user in MongoDB,
     returns JWT + user info with chosen role.
     """
-    try:
-        auth_service = AuthService()
-        user, jwt_token = await auth_service.verify_google_token_and_login(
-            body.id_token, role=body.role, company=body.company
-        )
-        if not user:
-            raise HTTPException(status_code=401, detail="Invalid Google token")
-        return {
-            "access_token": jwt_token,
-            "token_type": "bearer",
-            "user": user,
-        }
-    except HTTPException as e:
-        raise e
-    except Exception as e:
-        from fastapi.responses import JSONResponse
-        print(f"FATAL ERROR in google-auth: {str(e)}")
-        return JSONResponse(
-            status_code=500,
-            content={"error": "Authentication Failed", "detail": str(e)}
-        )
+    auth_service = AuthService()
+    user, jwt_token = await auth_service.verify_google_token_and_login(
+        body.id_token, role=body.role, company=body.company
+    )
+    if not user:
+        raise HTTPException(status_code=401, detail="Invalid Google token")
+    return {
+        "access_token": jwt_token,
+        "token_type": "bearer",
+        "user": user,
+    }
 
 
 @router.post("/register", response_model=dict)

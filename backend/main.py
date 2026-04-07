@@ -86,9 +86,14 @@ async def lifespan(app: FastAPI):
     
     # PROD-SEED: If database is empty, seed with demo users
     from database.database import db
+    user_count = -1
     if db.database is not None:
-        user_count = await db.database.users.count_documents({})
-        print(f"Database active. Total users: {user_count}")
+        try:
+            user_count = await db.database.users.count_documents({})
+            print(f"Database active. Total users: {user_count}")
+        except Exception as e:
+            print(f"    Startup DB check failed: {e}")
+    
     if user_count == 0:
         print("    Empty database detected! Auto-seeding demo users...")
         try:
@@ -149,12 +154,10 @@ async def root():
 
 @app.get("/health")
 async def health():
-    from database.database import db
-    db_status = "connected" if db.database is not None else "disconnected"
+    print("Health check reached!")
     return {
         "status": "healthy",
-        "database": db_status,
         "environment": os.environ.get("ENVIRONMENT", "development"),
-        "version": "1.0.1",
+        "version": "2.0.0",
         "allowed_origins": ALLOWED_ORIGINS
     }
