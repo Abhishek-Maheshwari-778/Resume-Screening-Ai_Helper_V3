@@ -112,8 +112,14 @@ db = Database()
 async def get_database():
     """Dependency for database access in routes"""
     if db.database is None:
-        await db.connect()
-    yield db.database
+        success = await db.connect()
+        if not success:
+            from fastapi import HTTPException
+            raise HTTPException(
+                status_code=503, 
+                detail="Database connection failed. Please ensure MONGODB_URL is correctly set and the cluster is accessible."
+            )
+    return db.database
 
 
 async def init_database():

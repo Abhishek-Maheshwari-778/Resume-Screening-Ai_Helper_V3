@@ -74,6 +74,7 @@ class ScreeningResult(BaseModel):
 
 import hashlib
 from datetime import datetime
+import asyncio
 
 @router.post("/analyze")
 @limiter.limit("5/minute")
