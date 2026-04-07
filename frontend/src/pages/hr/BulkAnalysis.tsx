@@ -18,7 +18,7 @@ const BulkAnalysis: React.FC = () => {
     if (!files || files.length === 0) return;
     
     setIsProcessing(true);
-    const API = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+    const API = import.meta.env.VITE_API_URL || '';
     const formData = new FormData();
     for (let i = 0; i < files.length; i++) {
       formData.append('files', files[i]);

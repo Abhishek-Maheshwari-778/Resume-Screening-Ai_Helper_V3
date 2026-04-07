@@ -25,7 +25,7 @@ const CandidateScreening: React.FC = () => {
       formData.append('job_description', jd);
       resumes.forEach(file => formData.append('resumes', file));
 
-      const API = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const API = import.meta.env.VITE_API_URL || '';
       const token = useAuthStore.getState().token;
       
       const res = await fetch(`${API}/api/ai/screen`, {

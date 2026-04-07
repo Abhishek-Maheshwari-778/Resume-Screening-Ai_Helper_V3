@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAuthStore } from '@/stores/authStore';
 import toast from 'react-hot-toast';
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const API = import.meta.env.VITE_API_URL || '';
 
 const Profile: React.FC = () => {
   const { user, token, updateProfile, refreshProfile } = useAuthStore();

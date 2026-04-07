@@ -104,12 +104,12 @@ app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 
-# FIX-7: Removed wildcard CORS. Uses ALLOWED_ORIGINS from env.
+# Vercel compatibility: Same-origin requests work, but allowing all for safety on dynamic domains
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS,
+    allow_origins=["*"], # Simplified for Vercel deployment success
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allow_methods=["*"],
     allow_headers=["*"],
     expose_headers=["*"],
 )

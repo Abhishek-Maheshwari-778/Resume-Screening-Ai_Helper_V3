@@ -26,7 +26,7 @@ const Home: React.FC = () => {
     if (!file) return;
     setUploadState('uploading');
     
-    const API = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+    const API = import.meta.env.VITE_API_URL || '';
     const formData = new FormData();
     formData.append('file', file);
 
@@ -59,7 +59,7 @@ const Home: React.FC = () => {
 
   const handleExport = async () => {
     if (!fileData) return;
-    const API = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+    const API = import.meta.env.VITE_API_URL || '';
     try {
       // BUG-1 FIX: send full analysis report, not just the recommendation string
       const reportContent = [

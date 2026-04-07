@@ -6,7 +6,7 @@ const PlatformAnalytics: React.FC = () => {
   const [data, setData] = React.useState<any>(null);
   const [loading, setLoading] = React.useState(true);
 
-  const API = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+  const API = import.meta.env.VITE_API_URL || '';
 
   React.useEffect(() => {
     const fetchStats = async () => {

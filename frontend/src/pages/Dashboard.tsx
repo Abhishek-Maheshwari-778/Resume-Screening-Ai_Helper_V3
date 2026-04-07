@@ -16,7 +16,7 @@ const Dashboard: React.FC = () => {
     const fetchStats = async () => {
       if (!token) return;
       try {
-        const API = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+        const API = import.meta.env.VITE_API_URL || '';
         const res = await fetch(`${API}/api/users/stats`, {
            headers: { 'Authorization': `Bearer ${token}` }
         });

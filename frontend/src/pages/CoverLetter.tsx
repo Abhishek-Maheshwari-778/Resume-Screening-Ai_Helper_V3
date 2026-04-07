@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast';
 
 const tones = ['Professional', 'Enthusiastic', 'Concise', 'Creative'];
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const API = import.meta.env.VITE_API_URL || '';
 
 const CoverLetter: React.FC = () => {
   const { token } = useAuthStore();

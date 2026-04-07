@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuthStore } from '@/stores/authStore';
 import { Link } from 'react-router-dom';
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const API = import.meta.env.VITE_API_URL || '';
 
 const HRDashboard: React.FC = () => {
   const { user, token } = useAuthStore();

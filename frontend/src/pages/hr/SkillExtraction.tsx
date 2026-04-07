@@ -12,7 +12,7 @@ const SkillExtraction: React.FC = () => {
   const [showUpload, setShowUpload] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const API = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+  const API = import.meta.env.VITE_API_URL || '';
 
   const fetchData = async () => {
     if (!token) return;

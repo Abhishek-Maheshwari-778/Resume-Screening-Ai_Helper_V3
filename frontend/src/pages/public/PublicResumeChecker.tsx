@@ -50,7 +50,7 @@ const PublicResumeChecker: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const jdFileInputRef = useRef<HTMLInputElement>(null);
 
-  const API = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+  const API = import.meta.env.VITE_API_URL || '';
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

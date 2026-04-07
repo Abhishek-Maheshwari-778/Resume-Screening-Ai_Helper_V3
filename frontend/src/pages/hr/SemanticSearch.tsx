@@ -16,7 +16,7 @@ const SemanticSearch: React.FC = () => {
     setHasSearched(true);
     
     try {
-      const API = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const API = import.meta.env.VITE_API_URL || '';
       const token = useAuthStore.getState().token;
       
       const res = await fetch(`${API}/api/ai/hr/search`, {

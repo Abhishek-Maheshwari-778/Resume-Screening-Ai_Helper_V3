@@ -37,7 +37,7 @@ const UserManagement: React.FC = () => {
   const [search, setSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState<Role | 'all'>('all');
 
-  const API = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+  const API = import.meta.env.VITE_API_URL || '';
 
   const fetchData = async () => {
     if (!token) return;

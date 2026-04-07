@@ -15,7 +15,7 @@ const JDMaker: React.FC = () => {
   const [chatMessage, setChatMessage] = useState('');
   const [isRefining, setIsRefining] = useState(false);
 
-  const API = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+  const API = import.meta.env.VITE_API_URL || '';
 
   const handleGenerate = async () => {
     if (!role) return toast.error('Role is required');

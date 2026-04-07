@@ -10,7 +10,7 @@ const SharedProfile: React.FC = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const API = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+        const API = import.meta.env.VITE_API_URL || '';
         const res = await fetch(`${API}/api/resumes/public/${id}`);
         
         if (res.status === 403) {

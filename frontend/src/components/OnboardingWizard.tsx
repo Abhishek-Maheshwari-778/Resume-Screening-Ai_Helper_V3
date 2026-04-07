@@ -20,7 +20,7 @@ const OnboardingWizard: React.FC = () => {
 
   const handleFinish = async () => {
     setIsSubmitting(true);
-    const API = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+    const API = import.meta.env.VITE_API_URL || '';
     try {
       const res = await fetch(`${API}/api/auth/onboarding`, {
         method: 'PUT',

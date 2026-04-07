@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAuthStore } from '@/stores/authStore';
 import toast from 'react-hot-toast';
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const API = import.meta.env.VITE_API_URL || '';
 
 const TEMPLATES = [
   { id: 'modern', name: 'Modern Pro', tags: ['ATS-Friendly', 'Tech'], emoji: '💼', colors: 'from-blue-500 to-cyan-500', description: 'Clean, minimal layout with sidebar. Top pick for tech roles.' },

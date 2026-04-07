@@ -6,7 +6,7 @@ import AILoadingState from '@/components/AILoadingState';
 import IndustryApplicability from '@/components/IndustryApplicability';
 import ResumeChatWidget from '@/components/ResumeChatWidget';
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const API = import.meta.env.VITE_API_URL || '';
 
 const ResumeChecker: React.FC = () => {
   const { token } = useAuthStore();
