@@ -54,7 +54,7 @@ class Settings(BaseSettings):
     
     class Config:
         env_file = ".env"
-        case_sensitive = True
+        case_sensitive = False
 
 
 def get_settings() -> Settings:
