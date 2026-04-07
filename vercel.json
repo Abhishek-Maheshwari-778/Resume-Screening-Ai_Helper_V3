@@ -13,10 +13,11 @@
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "api/index.py" },
+    { "src": "/assets/(.*)", "dest": "frontend/assets/$1" },
     { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
+    { "src": "/(.*)", "dest": "frontend/index.html" }
   ],
   "env": {
-    "VERCEL_MONOREPO_FIX": "4.0_FINAL"
+    "BUILD_STAMP": "2026-04-07-17-33"
   }
 }
