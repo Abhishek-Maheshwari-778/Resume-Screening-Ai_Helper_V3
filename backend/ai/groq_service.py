@@ -14,7 +14,10 @@ from utils.config import get_settings
 class GroqService:
     def __init__(self):
         settings = get_settings()
-        self.client = Groq(api_key=settings.GROQ_API_KEY)
+        self.client = Groq(
+            api_key=settings.GROQ_API_KEY,
+            timeout=20.0  # 20 seconds max per request
+        )
         # Model fallback chain — most capable first
         self.model = "llama-3.3-70b-versatile"
         self.fast_model = "llama-3.1-8b-instant"  # Faster/cheaper for bulk tasks
